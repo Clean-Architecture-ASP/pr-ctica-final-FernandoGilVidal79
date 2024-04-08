@@ -16,6 +16,6 @@ public record Currency(decimal quantity, CurrencyType currencyType)
 
     public static Currency Zero(CurrencyType currencyType) => new(0, currencyType);
 
-    public bool IsZero => this == Zero(currencyType);
+    public bool IsZero() => this == Zero(currencyType);
 }
 
