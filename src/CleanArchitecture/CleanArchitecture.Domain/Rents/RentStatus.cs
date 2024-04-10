@@ -1,6 +1,5 @@
 namespace CleanArchitecture.Domain.Rents;
 
-
 public enum RentStatus
 {
     Reserved = 1,

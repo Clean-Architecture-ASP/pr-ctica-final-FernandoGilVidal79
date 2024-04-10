@@ -60,18 +60,26 @@ public sealed class Rent : Entity
 
     public DateTime? CancelDate {get; private set;}
 
-    public static Rent Renting(
-    
-        Guid vehicleId,
+    public static Rent Renting(  
+        Vehicle vehicle,
         Guid userId,
         DateRange duration,
         DateTime creationTime,
-        PriceDetail priceDetail
+        PriceService priceService
     )
+  
     {
-        var rent = new Rent(Guid.NewGuid(), vehicleId, userId, duration,priceDetail.PriceByPeriod, priceDetail.Maintenance, priceDetail.Extras, priceDetail.TotalPrice, RentStatus.Reserved, creationTime);
+        var priceDetail = priceService.CalculatePrice(vehicle, duration);
+        var rent = new Rent(Guid.NewGuid(), vehicle.Id, userId, duration,priceDetail.PriceByPeriod, priceDetail.Maintenance, priceDetail.Extras, priceDetail.TotalPrice, RentStatus.Reserved, creationTime);
         rent.RaiseDomainEvent(new RentReservedDomainEvent(rent.Id));
-
+        vehicle.LastRentDate =  creationTime;
         return rent;
     } 
+    public Result Confirm(DateTime  actualDate)
+    {
+        if (RentStatus != RentStatus.Reserved)
+        {
+            //Se dispara una excepción
+        }
+    }
 }

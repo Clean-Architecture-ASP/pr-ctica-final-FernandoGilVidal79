@@ -38,7 +38,7 @@ namespace CleanArchitecture.Domain.Vehicles;
 
         public Currency Maintenance {get; private set;}
 
-        public DateTime? LastRentDate{ get; private set;}
+        public DateTime? LastRentDate{get; internal set;}
 
         public List<Extra> Extras {get; private set;} = new ();
     }
