@@ -98,12 +98,10 @@ public sealed class Rent : Entity
         RentStatus = RentStatus.Rejected;
         RejectDate = actualDate;
         RaiseDomainEvent(new RentRejectedDomainEvent(Id));
-
         return Result.Success();
-
     }
 
-        public Result Cancel(DateTime actualDate)
+    public Result Cancel(DateTime actualDate)
     {
         if (RentStatus != RentStatus.Confirmed)
         {
@@ -119,8 +117,19 @@ public sealed class Rent : Entity
         RentStatus = RentStatus.Cancelled;
         CancelDate = actualDate;
         RaiseDomainEvent(new RentCancelledDomainEvent(Id));
-
         return Result.Success();
+    }
 
+        public Result Complete(DateTime actualDate)
+    {
+        if (RentStatus != RentStatus.Confirmed)
+        {
+            return Result.Failure(RentErrors.NotConfirmed);
+        }
+
+        RentStatus = RentStatus.Completed;
+        CompleteDate = actualDate;
+        RaiseDomainEvent(new RentCompletedDomainEvent(Id));
+        return Result.Success();
     }
 }
