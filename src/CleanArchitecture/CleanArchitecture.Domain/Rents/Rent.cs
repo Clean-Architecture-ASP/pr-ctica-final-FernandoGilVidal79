@@ -1,4 +1,5 @@
 using System.Dynamic;
+using System.Net;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Rents.Events;
 using CleanArchitecture.Domain.Vehicles;
@@ -54,7 +55,7 @@ public sealed class Rent : Entity
 
     public DateTime? ConfirmationDate {get; private set;}
 
-    public DateTime? DenegationDate {get; private set;}
+    public DateTime? RejectDate {get; private set;}
 
     public DateTime? CompleteDate {get; private set;}
 
@@ -79,7 +80,47 @@ public sealed class Rent : Entity
     {
         if (RentStatus != RentStatus.Reserved)
         {
-            //Se dispara una excepción
+            return Result.Failure(RentErrors.NotReserved);
         }
+        RentStatus = RentStatus.Confirmed;
+        ConfirmationDate = actualDate;
+        RaiseDomainEvent (new RentConfirmedDomainEvent(Id));
+        return Result.Success();
+    }
+
+    public Result Reject(DateTime actualDate)
+    {
+        if (RentStatus != RentStatus.Reserved)
+        {
+            return Result.Failure(RentErrors.NotReserved);
+        }
+
+        RentStatus = RentStatus.Rejected;
+        RejectDate = actualDate;
+        RaiseDomainEvent(new RentRejectedDomainEvent(Id));
+
+        return Result.Success();
+
+    }
+
+        public Result Cancel(DateTime actualDate)
+    {
+        if (RentStatus != RentStatus.Confirmed)
+        {
+            return Result.Failure(RentErrors.NotConfirmed);
+        }
+
+        var currentDate = DateOnly.FromDateTime(actualDate);
+        if (currentDate > Duration.Start)
+        {
+            return Result.Failure(RentErrors.AlreadyStarted);
+        }
+
+        RentStatus = RentStatus.Cancelled;
+        CancelDate = actualDate;
+        RaiseDomainEvent(new RentCancelledDomainEvent(Id));
+
+        return Result.Success();
+
     }
 }

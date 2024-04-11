@@ -11,5 +11,9 @@ public static class RentErrors
     public static Error Overlap  = new Error("Rent.Overlap","El alquiler está siendo tomad por dos o más clientes al mismo tiempo");  
     public static Error  NotReserved = new Error("Rent.NotReserved", "El alquiler no está reservado");
     public static Error  NotConfirmed = new Error("Rent.NotConfirmed", "El alquiler no está reservado");
+
+ public static Error  AlreadyStarted = new Error("Rent.AlreadyStarted", "El alquiler ya  ha  comenzado");
+
+
 }
-}
+
