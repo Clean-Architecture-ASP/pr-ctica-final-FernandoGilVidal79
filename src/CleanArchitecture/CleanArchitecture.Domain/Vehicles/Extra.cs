@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CleanArchitecture.Domain.Vehicles;
-
 namespace CleanArchitecture.Domain.Vehicles;
 
-    public enum Extra
+public enum Extra
     {
         Wifi = 1,
         AirConditioning = 2,

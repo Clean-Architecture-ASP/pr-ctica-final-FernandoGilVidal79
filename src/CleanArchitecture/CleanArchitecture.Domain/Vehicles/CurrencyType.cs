@@ -17,10 +17,10 @@ public record CurrencyType
         Eur
     };
 
-    public static CurrencyType FromCode(string code){
+    public static CurrencyType FromCode(string code)
+    {
         return All.FirstOrDefault(x=> x.Code == code) ?? 
         throw new ApplicationException("El tipo de Moneda nos es Valido");
     }
-
 
 }

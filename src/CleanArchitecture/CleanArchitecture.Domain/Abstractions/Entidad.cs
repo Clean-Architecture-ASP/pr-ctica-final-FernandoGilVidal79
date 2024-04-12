@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CleanArchitecture.Domain.Abstractions
+﻿namespace CleanArchitecture.Domain.Abstractions
 {
     public abstract class Entity
     {
-
         private readonly List<IDomainEvent> _domainEvents = new();
         protected Entity(Guid id)
         {
@@ -17,8 +10,8 @@ namespace CleanArchitecture.Domain.Abstractions
 
         public Guid Id {get; init;}
 
-        public IReadOnlyList<IDomainEvent> GetDomainEvents(){
-
+        public IReadOnlyList<IDomainEvent> GetDomainEvents()
+        {
             return _domainEvents.ToList();
         }
 
@@ -27,7 +20,8 @@ namespace CleanArchitecture.Domain.Abstractions
             _domainEvents.Clear();
         }
 
-        protected void RaiseDomainEvent(IDomainEvent domainEvent) {
+        protected void RaiseDomainEvent(IDomainEvent domainEvent) 
+        {
           _domainEvents.Add(domainEvent);  
         }
     }

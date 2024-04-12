@@ -12,7 +12,8 @@ public sealed record DateRange{
 
     public int DaysRent => End.DayNumber - Start.DayNumber;
 
-    public static DateRange Create(DateOnly start, DateOnly end){
+    public static DateRange Create(DateOnly start, DateOnly end)
+    {
         if (start > end)
         {
             throw new ApplicationException("La fecha final es anterior a la fecha de inicio");

@@ -5,7 +5,8 @@ namespace CleanArchitecture.Domain.Rents;
 
 public class PriceService
 {
-    public PriceDetail CalculatePrice(Vehicle vehicle, DateRange period){
+    public PriceDetail CalculatePrice(Vehicle vehicle, DateRange period)
+    {
         var currencyType = vehicle.Price!.currencyType;
         var priceByPeriod = new Currency(period.DaysRent * vehicle.Price.quantity, currencyType);
 
@@ -37,7 +38,6 @@ public class PriceService
         totalPrice += extraCharger;
 
         return new PriceDetail(priceByPeriod, vehicle.Maintenance, extraCharger, totalPrice);        
-
 
     }
 }
