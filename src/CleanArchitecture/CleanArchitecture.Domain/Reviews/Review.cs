@@ -11,8 +11,8 @@ public sealed class Review : Entity
                 Guid vehicleId,
                 Guid rentId,
                 Guid userId,
-                int rating,
-                string comment,
+                Rating rating,
+                Comment comment,
                 DateTime? creationDate
     
     
@@ -34,18 +34,18 @@ public sealed class Review : Entity
 
     public Guid UserId {get; private set;}
 
-    public int Rating {get; private set;}
+    public Rating Rating {get; private set;}
 
-    public string? Comment {get; private set;}
+    public Comment Comment {get; private set;}
 
     public DateTime? CreationDate {get ; private set;}
 
 
-    public static Result<Review> Create(Rent rent, int rating, string comment, DateTime? creationDate)
+    public static Result<Review> Create(Rent rent, Rating rating, Comment comment, DateTime? creationDate)
     {
         if (rent.RentStatus != RentStatus.Completed)
         {
-            return Result.Failure<Review>(ReviewErrors.NotChosen);
+            return Result.Failure<Review>(ReviewErrors.NotEligible);
         }
 
         var review = new Review(Guid.NewGuid(), rent.VehiculeId, rent.Id, rent.UserId, rating, comment, creationDate);
