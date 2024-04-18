@@ -1,10 +1,9 @@
-using System.Dynamic;
 using CleanArchitecture.Domain.Abstractions;
-
+using CleanArchitecture.Domain.Shared;
 
 namespace CleanArchitecture.Domain.Vehicles;
 
-    public sealed class Vehicle : Entity
+public sealed class Vehicle : Entity
     {
 
 

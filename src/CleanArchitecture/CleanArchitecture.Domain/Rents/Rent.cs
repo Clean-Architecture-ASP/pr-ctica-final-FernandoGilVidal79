@@ -1,8 +1,7 @@
-using System.Dynamic;
-using System.Net;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Rents.Events;
 using CleanArchitecture.Domain.Vehicles;
+using CleanArchitecture.Domain.Shared;
 
 namespace CleanArchitecture.Domain.Rents;
 

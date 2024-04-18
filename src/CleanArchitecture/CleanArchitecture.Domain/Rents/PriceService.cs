@@ -1,6 +1,5 @@
-using System.Security.Cryptography;
 using CleanArchitecture.Domain.Vehicles;
-
+using CleanArchitecture.Domain.Shared;
 namespace CleanArchitecture.Domain.Rents;
 
 public class PriceService

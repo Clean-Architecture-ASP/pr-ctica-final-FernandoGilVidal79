@@ -1,4 +1,4 @@
-namespace CleanArchitecture.Domain.Vehicles;
+namespace CleanArchitecture.Domain.Shared;
 
 public record Currency(decimal quantity, CurrencyType currencyType)
 {
