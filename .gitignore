@@ -51,3 +51,6 @@ Thumbs.db
 .vs/
 src/CleanArchitecture/CleanArchitecture.Domain/bin/
 src/CleanArchitecture/CleanArchitecture.Domain/obj/
+src/CleanArchitecture/CleanArchitecture.Application/obj/
+src/CleanArchitecture/CleanArchitecture.Application/bin/
+
