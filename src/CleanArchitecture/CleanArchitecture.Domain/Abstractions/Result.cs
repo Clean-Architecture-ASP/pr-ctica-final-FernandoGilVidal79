@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CleanArchitecture.Domain.Abstractions;
 
-public  class Result
+public class Result
 {
 
     protected internal Result(bool isSuccess,  Error error)
