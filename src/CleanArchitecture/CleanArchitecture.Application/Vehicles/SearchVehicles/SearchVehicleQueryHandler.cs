@@ -1,4 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
+
 using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Messaging;
 using CleanArchitecture.Domain.Abstractions;
@@ -76,8 +76,5 @@ internal sealed class SearchVehiclesQueryHandler : IQUeryHandler<SearchVehiclesQ
          );
 
          return vehicles.ToList();
-    }
-
-    
-
+    }   
 }
