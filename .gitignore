@@ -53,4 +53,6 @@ src/CleanArchitecture/CleanArchitecture.Domain/bin/
 src/CleanArchitecture/CleanArchitecture.Domain/obj/
 src/CleanArchitecture/CleanArchitecture.Application/obj/
 src/CleanArchitecture/CleanArchitecture.Application/bin/
+src/CleanArchitecture/CleanArchitecture.Infrastructure/obj/
+src/CleanArchitecture/CleanArchitecture.Infrastructure/bin/
 
