@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanArchitecture.Application.Abstractions.Behaviours;
 
-
 public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IBaseCommand
 {
     private readonly ILogger<TRequest> _logger;
@@ -29,6 +28,5 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
             _logger.LogError(exception, $"El comando {name} tuvo errores");
             throw;
         }
-
     }
 }

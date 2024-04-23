@@ -11,16 +11,11 @@ namespace CleanArchitecture.Application.Rents.RentReservation;
 internal sealed class RentReservationCommandHandler : ICommandHandler<RentReservationCommand, Guid>
 {
 
-
-
     private readonly IUserRepository _userRepository;
     private readonly IVehicleRepository _vehicleRepository;
     private readonly IRentRepository _rentRepository;
-
     private readonly PriceService _priceService;
-
     private readonly IUnitOfWork _unitOfWork;
-
     private readonly IDateTimeProvider _dateTimeProvider;
 
     public RentReservationCommandHandler(IUserRepository userRepository, IVehicleRepository vehicleRepository, IRentRepository rentRepository, PriceService priceService, IUnitOfWork unitOfWork, IDateTimeProvider dateTimeProvider)

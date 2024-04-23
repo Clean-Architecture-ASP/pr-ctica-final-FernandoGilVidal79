@@ -5,7 +5,6 @@ using MediatR;
 
 namespace CleanArchitecture.Application.Abstractions.Behaviours;
 
-
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IBaseCommand
 {
 
@@ -36,8 +35,5 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
         }
 
         return await next();
-
-
-
     }
 }                                      
