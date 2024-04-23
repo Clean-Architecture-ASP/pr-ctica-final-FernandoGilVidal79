@@ -1,6 +1,11 @@
 using CleanArchitecture.Application.Abstractions.Clock;
 using CleanArchitecture.Application.Abstractions.Email;
+using CleanArchitecture.Domain.Abstractions;
+using CleanArchitecture.Domain.Rents;
+using CleanArchitecture.Domain.Users;
+using CleanArchitecture.Domain.Vehicles;
 using CleanArchitecture.Infrastructure.Clock;
+using CleanArchitecture.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +23,12 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>{
             options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
         });
+
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IVehicleRepository, VehicleRepository>();
+        services.AddScoped<IRentRepository, RentRepository>();
+
+        services.AddScoped<IUnitOfWork> (sp => sp.GetRequiredService<ApplicationDbContext>());
 
         return services;
     }
