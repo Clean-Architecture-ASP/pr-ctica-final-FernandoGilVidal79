@@ -2,7 +2,7 @@ using CleanArchitecture.Domain.Shared;
 using CleanArchitecture.Domain.Vehicles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.IdentityModel.Tokens;
+
 
 namespace CleanArchitecture.Infrastructure.Configurations;
 
@@ -34,6 +34,8 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
                 .HasConversion(curremcyType => curremcyType.Code, code => CurrencyType.FromCode(code!));
             }
         );
+
+        builder.Property<uint>("Version").IsRowVersion();
 
     }
 }

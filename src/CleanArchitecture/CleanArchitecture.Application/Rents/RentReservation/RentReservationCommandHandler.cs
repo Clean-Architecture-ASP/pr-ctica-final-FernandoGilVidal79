@@ -29,43 +29,42 @@ internal sealed class RentReservationCommandHandler : ICommandHandler<RentReserv
         _dateTimeProvider = dateTimeProvider;
     }
 
-    public async Task<Result<Guid>> Handle(RentReservationCommand request, CancellationToken cancellationToken)
-    {
-       var user = await _userRepository.GetByIdAsync(request.userId, cancellationToken);
-       
-       if (user == null)
-       {
-            return Result.Failure<Guid>(UserErrors.NotFound);
-       }
-
-       var vehicle = await _vehicleRepository.GetByIdAsync(request.vehicleId, cancellationToken);
-
-       if (vehicle == null)
-       {
-            return Result.Failure<Guid>(VehicleErrors.NotFound);
-       }
-
-       var duration = DateRange.Create(request.dateStart, request.dateEnd);
-
-       if (await _rentRepository.IsOverlappingAsync(vehicle, duration, cancellationToken))
-       {
-            return Result.Failure<Guid>(RentErrors.Overlap);
-       }
-
-     try{
-
-       var rent = Rent.Renting(vehicle, user.Id, duration, _dateTimeProvider.CurrentTime, _priceService);
-       _rentRepository.Add(rent);
-
-      await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-       return rent.Id;
-     }
-     catch(ConcurrencyException)
+     public async Task<Result<Guid>> Handle(RentReservationCommand request, CancellationToken cancellationToken)
      {
-          return Result.Failure<Guid>(RentErrors.Overlap);
+          var user = await _userRepository.GetByIdAsync(request.userId, cancellationToken);
+          
+          if (user == null)
+          {
+               return Result.Failure<Guid>(UserErrors.NotFound);
+          }
+
+          var vehicle = await _vehicleRepository.GetByIdAsync(request.vehicleId, cancellationToken);
+
+          if (vehicle == null)
+          {
+               return Result.Failure<Guid>(VehicleErrors.NotFound);
+          }
+
+          var duration = DateRange.Create(request.dateStart, request.dateEnd);
+
+          if (await _rentRepository.IsOverlappingAsync(vehicle, duration, cancellationToken))
+          {
+               return Result.Failure<Guid>(RentErrors.Overlap);
+          }
+
+          try
+          {
+
+          var rent = Rent.Renting(vehicle, user.Id, duration, _dateTimeProvider.CurrentTime, _priceService);
+          _rentRepository.Add(rent);
+          await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+          return rent.Id;
+          }
+          catch(ConcurrencyException)
+          {
+               return Result.Failure<Guid>(RentErrors.Overlap);
+          }
+
      }
-
-
-    }
 }
