@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Domain.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +24,16 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
     {
-        var result = await base.SaveChangesAsync(cancellationToken);
-        await PublishDomainAsync();
-        return result;
+        try
+        {
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await PublishDomainAsync();
+            return result;
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            throw new ConcurrencyException ("Concurrencia", ex);
+        }
     }
 
     private async Task PublishDomainAsync()

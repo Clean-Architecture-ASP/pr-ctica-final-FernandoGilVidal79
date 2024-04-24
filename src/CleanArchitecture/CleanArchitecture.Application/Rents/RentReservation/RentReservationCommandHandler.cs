@@ -1,5 +1,6 @@
 using CleanArchitecture.Application.Abstractions.Clock;
 using CleanArchitecture.Application.Abstractions.Messaging;
+using CleanArchitecture.Application.Exceptions;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Rents;
 using CleanArchitecture.Domain.Users;
@@ -51,12 +52,19 @@ internal sealed class RentReservationCommandHandler : ICommandHandler<RentReserv
             return Result.Failure<Guid>(RentErrors.Overlap);
        }
 
+     try{
+
        var rent = Rent.Renting(vehicle, user.Id, duration, _dateTimeProvider.CurrentTime, _priceService);
        _rentRepository.Add(rent);
 
       await _unitOfWork.SaveChangesAsync(cancellationToken);
 
        return rent.Id;
+     }
+     catch(ConcurrencyException)
+     {
+          return Result.Failure<Guid>(RentErrors.Overlap);
+     }
 
 
     }
