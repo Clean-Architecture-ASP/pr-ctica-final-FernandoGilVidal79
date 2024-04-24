@@ -30,16 +30,11 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IRentRepository, RentRepository>();
-
         services.AddScoped<IUnitOfWork> (sp => sp.GetRequiredService<ApplicationDbContext>());
 
 
-    services.AddSingleton<ISqlConnectionFactory> (_ =>  new SqlConnectionFactory(connectionString));
-    
-
+    services.AddSingleton<ISqlConnectionFactory> (_ =>  new SqlConnectionFactory(connectionString));   
         SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
-
-
         return services;
     }
 }
