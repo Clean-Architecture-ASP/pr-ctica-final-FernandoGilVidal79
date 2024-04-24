@@ -9,4 +9,6 @@ public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, Result> w
 }
 
 public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand, Result<TResponse>> where TCommand : ICommand<TResponse>
-{}
+{
+    
+}

@@ -10,7 +10,6 @@ internal sealed class RentReservationDomainEventHandler : INotificationHandler<R
 {
     private readonly IRentRepository _rentRepository;
     private readonly IUserRepository _userRespository;
-
     private readonly IEmailService _emailsService;
 
     public RentReservationDomainEventHandler(IRentRepository rentRepository, IUserRepository userRespository, IEmailService emailsService)

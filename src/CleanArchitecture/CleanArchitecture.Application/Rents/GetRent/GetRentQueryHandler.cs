@@ -2,16 +2,13 @@ using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Messaging;
 using CleanArchitecture.Domain.Abstractions;
 using Dapper;
-using Microsoft.VisualBasic;
 
 namespace CleanArchitecture.Application.Rents.GetRent;
 
 internal sealed class GetRentQueryHandler : IQUeryHandler<GetRentQuery, RentResponse>
 {
 
-    private readonly ISqlConnectionFactory  _sqlConnectionFactory;
-    
-   
+    private readonly ISqlConnectionFactory  _sqlConnectionFactory;    
 
     public GetRentQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
     {
@@ -20,7 +17,6 @@ internal sealed class GetRentQueryHandler : IQUeryHandler<GetRentQuery, RentResp
     public async Task<Result<RentResponse>> Handle(GetRentQuery request, CancellationToken cancellationToken)
     {
         using var connection = _sqlConnectionFactory.CreateConnection();
-
 
          var sql = """
             SELECT 

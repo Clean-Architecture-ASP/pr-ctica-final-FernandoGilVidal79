@@ -40,7 +40,6 @@ public sealed class Review : Entity
 
     public DateTime? CreationDate {get ; private set;}
 
-
     public static Result<Review> Create(Rent rent, Rating rating, Comment comment, DateTime? creationDate)
     {
         if (rent.RentStatus != RentStatus.Completed)
