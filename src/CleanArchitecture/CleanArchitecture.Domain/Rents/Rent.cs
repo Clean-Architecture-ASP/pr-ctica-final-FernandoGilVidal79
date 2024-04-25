@@ -7,7 +7,10 @@ namespace CleanArchitecture.Domain.Rents;
 
 public sealed class Rent : Entity
 {
+    protected Rent()
+    {
 
+    }
 
     public Rent(Guid id,
         Guid vehicleId,

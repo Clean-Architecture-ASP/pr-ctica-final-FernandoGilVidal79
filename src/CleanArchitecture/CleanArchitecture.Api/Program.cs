@@ -1,3 +1,4 @@
+using CleanArchitecture.Api.Extensions;
 using CleanArchitecture.Application;
 using CleanArchitecture.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ApplyMigration();
 
 app.MapControllers();
 app.Run();

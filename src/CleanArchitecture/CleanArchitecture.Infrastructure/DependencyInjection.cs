@@ -12,6 +12,7 @@ using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 
 namespace CleanArchitecture.Infrastructure;
 
@@ -21,6 +22,7 @@ public static class DependencyInjection
     {
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         services.AddTransient<IEmailService, EmailService>();
+
         
         var connectionString = configuration.GetConnectionString("Database") ?? throw new ArgumentNullException(nameof(configuration));
         services.AddDbContext<ApplicationDbContext>(options =>{
@@ -31,6 +33,7 @@ public static class DependencyInjection
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IRentRepository, RentRepository>();
         services.AddScoped<IUnitOfWork> (sp => sp.GetRequiredService<ApplicationDbContext>());
+
 
 
     services.AddSingleton<ISqlConnectionFactory> (_ =>  new SqlConnectionFactory(connectionString));   

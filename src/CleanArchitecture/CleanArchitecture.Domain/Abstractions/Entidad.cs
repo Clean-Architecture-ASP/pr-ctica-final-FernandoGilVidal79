@@ -2,6 +2,12 @@
 {
     public abstract class Entity
     {
+
+        public Entity()
+        {
+            
+        }
+
         private readonly List<IDomainEvent> _domainEvents = new();
         protected Entity(Guid id)
         {
