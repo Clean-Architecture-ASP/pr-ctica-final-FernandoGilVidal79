@@ -11,16 +11,18 @@ public sealed class Apartment : Entity
         
     }
 
-    public Apartment (Guid id) : base(id)
+    public Apartment (Guid id, Address? address, Currency price,  DateTime? lastRentDate) : base(id)
     {
-
+        Address = address;
+        Price = price;
+        LastRentDate = lastRentDate;
     }
 
 
     public Address? Address {get; private set;}
 
+    public Currency Price {get;}
 
-
-
+    public DateTime? LastRentDate {get;}
 
 }
