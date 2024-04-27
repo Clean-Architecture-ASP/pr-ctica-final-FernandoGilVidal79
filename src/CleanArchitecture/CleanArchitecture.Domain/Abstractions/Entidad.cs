@@ -1,5 +1,5 @@
-﻿namespace CleanArchitecture.Domain.Abstractions
-{
+﻿namespace CleanArchitecture.Domain.Abstractions;
+
     public abstract class Entity
     {
 
@@ -31,4 +31,4 @@
           _domainEvents.Add(domainEvent);  
         }
     }
-}
+
