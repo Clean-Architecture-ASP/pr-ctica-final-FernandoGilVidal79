@@ -1,6 +1,7 @@
 
 using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Messaging;
+using CleanArchitecture.Application.Shared;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Rents;
 using Dapper;

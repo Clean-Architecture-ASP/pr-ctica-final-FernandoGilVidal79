@@ -1,3 +1,6 @@
+
+using CleanArchitecture.Application.Shared;
+
 namespace CleanArchitecture.Application.Vehicles.SearchVehicles;
 
 public sealed class SearchVehicleResponse{
