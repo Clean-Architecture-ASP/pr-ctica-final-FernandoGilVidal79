@@ -25,7 +25,7 @@ public class RentController : Controller
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
 
-    [HttpPost()]
+    [HttpPost]
     public async Task<IActionResult> RentReservation(Guid id, RentReservationRequest rentRequest, CancellationToken cancellationToken)
     {
         var command = new RentReservationCommand(rentRequest.VehicleId, 

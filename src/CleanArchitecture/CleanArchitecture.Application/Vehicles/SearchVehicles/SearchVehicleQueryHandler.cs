@@ -34,28 +34,28 @@ internal sealed class SearchVehiclesQueryHandler : IQUeryHandler<SearchVehiclesQ
         using var connection = _sqlConnectionFactory.CreateConnection();
 
         const string sql = """
-            SELECT 
-                v.id AS Id,
-                v.model AS Model,
-                v.vin AS Vin,
-                v.price AS Price,
-                v.currency_type_price as CurrencyType,
-                a.address_countr AS Country,
-                a.address_city AS City,
-                a.address_province AS Province,
-                a.address_street as Street
-            FROM
-                Vehicles AS v
-            WHERE NOT EXISTS
-            (
-                SELECT 1
-                FROM rents AS r
-                WHERE 
-                    b.vehicle_id = v.id
-                    b.duration_start <= @EndDate AND
-                    b.duration_end >= @StartDate AND
-                    b.status = ANY(@ActiveRentStatuses)
-            )
+        SELECT 
+            v.id AS Id,
+            v.model AS Model,
+            v.vin AS Vin,
+            v.price_quantity AS Price,
+            v.price_currency_type as CurrencyType,
+            v.address_country AS Country,
+            v.address_city AS City,
+            v.address_province AS Province,
+            v.address_street as Street
+        FROM
+            Vehicles AS v
+        WHERE NOT EXISTS
+        (
+            SELECT 1
+            FROM rents AS r
+            WHERE 
+                r.vehicule_id = v.id AND
+                r.duration_start <= @EndDate AND
+                r.duration_end >= @StartDate AND
+                r.rent_status = ANY(@ActiveRentStatuses)
+        )
 
         """;
 

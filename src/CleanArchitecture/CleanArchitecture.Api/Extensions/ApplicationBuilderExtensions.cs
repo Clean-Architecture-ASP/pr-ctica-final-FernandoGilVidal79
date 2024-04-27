@@ -1,3 +1,4 @@
+using CleanArchitecture.Api.Middleware;
 using CleanArchitecture.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,5 +25,10 @@ public static class ApplicationBuilderExtensions
                 logger.LogError(ex, "Error en migración");
             }
         }
+    }
+
+    public static void UseCustomExceptionHandler(this IApplicationBuilder app)
+    {
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
     }
 }
