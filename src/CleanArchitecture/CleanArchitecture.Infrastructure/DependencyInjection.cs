@@ -2,6 +2,7 @@ using CleanArchitecture.Application.Abstractions.Clock;
 using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Email;
 using CleanArchitecture.Domain.Abstractions;
+using CleanArchitecture.Domain.Apartments;
 using CleanArchitecture.Domain.Rents;
 using CleanArchitecture.Domain.Users;
 using CleanArchitecture.Domain.Vehicles;
@@ -21,6 +22,7 @@ public static class DependencyInjection
     {
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
         services.AddTransient<IEmailService, EmailService>();
+
         
         var connectionString = configuration.GetConnectionString("Database") ?? throw new ArgumentNullException(nameof(configuration));
         services.AddDbContext<ApplicationDbContext>(options =>{
@@ -30,7 +32,9 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IRentRepository, RentRepository>();
+        services.AddScoped<IApartmentRepository, ApartmentRepository>();
         services.AddScoped<IUnitOfWork> (sp => sp.GetRequiredService<ApplicationDbContext>());
+
 
 
     services.AddSingleton<ISqlConnectionFactory> (_ =>  new SqlConnectionFactory(connectionString));   

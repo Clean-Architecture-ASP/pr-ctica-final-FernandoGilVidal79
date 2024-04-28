@@ -4,6 +4,12 @@ namespace CleanArchitecture.Domain.Users;
 
 public sealed class User: Entity
 {
+
+    public User()
+    {
+        
+    }
+    
     private User(Guid id,
     Name name,
     Surname surname,

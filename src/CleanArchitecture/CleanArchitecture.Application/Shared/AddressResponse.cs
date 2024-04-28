@@ -1,4 +1,4 @@
-namespace CleanArchitecture.Application.Vehicles.SearchVehicles;
+namespace CleanArchitecture.Application.Shared;
 
 public sealed class AddressResponse 
 {

@@ -10,7 +10,8 @@ internal sealed class RentRepository : Repository<Rent>, IRentRepository
 {
 
     private static readonly RentStatus[] ActiveRentStatuses =
-    { RentStatus.Reserved,
+    {   
+        RentStatus.Reserved,
         RentStatus.Confirmed,
         RentStatus.Completed
     };

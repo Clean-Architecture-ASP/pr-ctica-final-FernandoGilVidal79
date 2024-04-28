@@ -1,7 +1,13 @@
-﻿namespace CleanArchitecture.Domain.Abstractions
-{
+﻿namespace CleanArchitecture.Domain.Abstractions;
+
     public abstract class Entity
     {
+
+        public Entity()
+        {
+            
+        }
+
         private readonly List<IDomainEvent> _domainEvents = new();
         protected Entity(Guid id)
         {
@@ -25,4 +31,4 @@
           _domainEvents.Add(domainEvent);  
         }
     }
-}
+
