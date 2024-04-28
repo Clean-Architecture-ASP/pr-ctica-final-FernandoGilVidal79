@@ -21,8 +21,8 @@ public sealed class Apartment : Entity
 
     public Address? Address {get; private set;}
 
-    public Currency Price {get;}
+    public Currency Price {get; private set;}
 
-    public DateTime? LastRentDate {get;}
+    public DateTime? LastRentDate {get; internal set;}
 
 }

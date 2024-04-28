@@ -54,4 +54,44 @@ public static class SeedDataExtensions
         connection.Execute(sql, vehicles);
 
     }
+
+        public static void SeedApartmentData(this IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        var sqlConnectionFactory = scope.ServiceProvider.GetService<ISqlConnectionFactory>();
+
+        using var connection = sqlConnectionFactory.CreateConnection();
+
+        var faker = new Faker();
+
+        List<object> apartments = new();
+        for (var i=0; i < 100; i++)
+        {
+            apartments.Add(new {
+                Id = Guid.NewGuid(),
+                Country = faker.Address.Country(),
+                Province = faker.Address.County(),
+                City = faker.Address.City(),
+                Street = faker.Address.StreetAddress(),
+                Departure = faker.Address.State(),
+                TotalPrice = faker.Random.Decimal(1000,20000),
+                CurrencyType = "EUR",
+                Price = faker.Random.Decimal(100,200),
+                LasDate = DateTime.MinValue
+            });
+        }
+
+        const string sql = """
+            INSERT INTO public.apartments
+             (id, address_street, address_departure, 
+              address_country, address_province, address_city, price_quantity,price_currency_type, last_rent_date)
+
+            VALUES (@id, @street, @departure, @country,@Province, @city, @TotalPrice, @currencytype, @LasDate)
+        """;
+        
+        connection.Execute(sql, apartments);
+
+    }
+
+
 }
