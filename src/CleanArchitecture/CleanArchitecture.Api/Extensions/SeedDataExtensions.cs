@@ -77,7 +77,7 @@ public static class SeedDataExtensions
                 TotalPrice = faker.Random.Decimal(1000,20000),
                 CurrencyType = "EUR",
                 Price = faker.Random.Decimal(100,200),
-                LasDate = DateTime.MinValue
+                Date = faker.Date.Past(30, DateTime.Now.AddMonths(-20))
             });
         }
 
@@ -86,7 +86,7 @@ public static class SeedDataExtensions
              (id, address_street, address_departure, 
               address_country, address_province, address_city, price_quantity,price_currency_type, last_rent_date)
 
-            VALUES (@id, @street, @departure, @country,@Province, @city, @TotalPrice, @currencytype, @LasDate)
+            VALUES (@id, @street, @departure, @country,@Province, @city, @TotalPrice, @currencytype, @Date)
         """;
         
         connection.Execute(sql, apartments);

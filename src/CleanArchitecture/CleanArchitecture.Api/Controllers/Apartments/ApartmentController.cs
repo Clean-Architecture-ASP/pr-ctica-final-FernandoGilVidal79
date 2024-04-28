@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Api.Controllers.Apartments;
 
-
-
 [ApiController]
 [Route("api/apartments")]
 public class ApartmentController : Controller
@@ -16,7 +14,6 @@ public class ApartmentController : Controller
     {
         _sender = sender;
     }
-
 
     [HttpGet]
     public async Task<IActionResult> SearchApartments(DateOnly startDate, DateOnly endDate, CancellationToken cancellationToken)

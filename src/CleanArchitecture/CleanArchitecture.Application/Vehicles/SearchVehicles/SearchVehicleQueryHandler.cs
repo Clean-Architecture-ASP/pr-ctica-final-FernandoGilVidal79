@@ -61,7 +61,7 @@ internal sealed class SearchVehiclesQueryHandler : IQUeryHandler<SearchVehiclesQ
         """;
 
         var vehicles = await connection.QueryAsync<SearchVehicleResponse, AddressResponse, SearchVehicleResponse>
-        ( sql, (vehicle, direction) => 
+        (sql, (vehicle, direction) => 
         {
             vehicle.Address = direction;
             return vehicle;
