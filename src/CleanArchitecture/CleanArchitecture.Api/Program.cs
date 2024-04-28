@@ -20,7 +20,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.ApplyMigration();
-app.SeedData();
+//app.SeedData();
+app.SeedApartmentData();
 app.UseCustomExceptionHandler();
 app.MapControllers();
 app.Run();

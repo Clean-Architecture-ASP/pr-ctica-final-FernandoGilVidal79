@@ -15,7 +15,6 @@ public class VehicleController : Controller
         _sender = sender;
     }
 
-
     [HttpGet]
     public async Task<IActionResult> SearchVehicles(DateOnly startDate, DateOnly endDate, CancellationToken cancellationToken)
     {

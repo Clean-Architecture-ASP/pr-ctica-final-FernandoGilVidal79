@@ -13,7 +13,7 @@ public sealed class Rent : Entity
     }
 
     public Rent(Guid id,
-        Guid vehicleId,
+        Guid productId,
         Guid userId,
         DateRange duration,
         Currency price,
@@ -26,7 +26,7 @@ public sealed class Rent : Entity
     
     ) : base (id)
     {
-        VehiculeId = vehicleId;
+        VehiculeId = productId;
         UserId = userId;
         Duration = duration;
         Price = price;

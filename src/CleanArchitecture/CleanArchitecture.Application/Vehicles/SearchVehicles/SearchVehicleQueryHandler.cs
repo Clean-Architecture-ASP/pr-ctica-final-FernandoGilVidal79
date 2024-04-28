@@ -1,6 +1,7 @@
 
 using CleanArchitecture.Application.Abstractions.Data;
 using CleanArchitecture.Application.Abstractions.Messaging;
+using CleanArchitecture.Application.Shared;
 using CleanArchitecture.Domain.Abstractions;
 using CleanArchitecture.Domain.Rents;
 using Dapper;
@@ -60,7 +61,7 @@ internal sealed class SearchVehiclesQueryHandler : IQUeryHandler<SearchVehiclesQ
         """;
 
         var vehicles = await connection.QueryAsync<SearchVehicleResponse, AddressResponse, SearchVehicleResponse>
-        ( sql, (vehicle, direction) => 
+        (sql, (vehicle, direction) => 
         {
             vehicle.Address = direction;
             return vehicle;
