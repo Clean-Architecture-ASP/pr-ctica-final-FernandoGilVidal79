@@ -1,3 +1,4 @@
+using CleanArchitecture.Domain.Apartments;
 using CleanArchitecture.Domain.Rents;
 using CleanArchitecture.Domain.Shared;
 using CleanArchitecture.Domain.Users;
@@ -41,6 +42,8 @@ internal sealed class RentConfiguration : IEntityTypeConfiguration<Rent>
         builder.OwnsOne(rent => rent.Duration);
 
         builder.HasOne<Vehicle>().WithMany().HasForeignKey(rent => rent.VehiculeId);
+
+        builder.HasOne<Apartment>().WithMany().HasForeignKey(rent => rent.VehiculeId);
 
         builder.HasOne<User>().WithMany().HasForeignKey(rent => rent.UserId);
     }
